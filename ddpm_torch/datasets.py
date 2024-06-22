@@ -59,7 +59,7 @@ class CIFAR10(tvds.CIFAR10):
     test_size = 10000
 
     def __init__(self, root, split="train", transform=None):
-        super().__init__(root=root, train=split != "test", transform=transform or self._transform, download=False)
+        super().__init__(root=root, train=split != "test", transform=transform or self._transform, download=True)
 
     def __getitem__(self, index):
         return super().__getitem__(index)[0]
@@ -233,7 +233,8 @@ def get_dataloader(
         drop_last=False,
         num_workers=0,
         distributed=False,
-        raw=False,
+        raw=False, 
+        download=True,
         **kwargs
 ):
     assert isinstance(val_size, float) and 0 <= val_size < 1
